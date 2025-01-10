@@ -51,7 +51,7 @@ This project is an **Attendance Management System (AMS)** designed to help manag
 ## Setup Instructions
 1. Clone this repository:
    ```bash
-   git clone <repository-link>
+   git clone [<repository-link>](https://github.com/starlightaris/StudentAttendanceMS.git)
    ```
 2. Open the project in your preferred IDE.
 3. Import dependencies using Maven (`pom.xml`).
