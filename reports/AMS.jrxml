@@ -1,0 +1,94 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="AMS" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db6d6af0-03c3-4cf1-ae63-f49fb95b9d9e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MYSQL"/>
+	<query language="SQL"><![CDATA[SELECT 
+    attendance.*, 
+    student.name,
+    course.courseName, 
+    batch.batchName
+FROM 
+    attendance
+JOIN 
+    student ON attendance.studentId = student.studentId
+JOIN 
+    course ON student.courseId = course.courseId
+JOIN 
+    batch ON student.batchId = batch.batchId;]]></query>
+	<field name="attendanceId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="attendanceId"/>
+		<property name="com.jaspersoft.studio.field.label" value="attendanceId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="attendance"/>
+	</field>
+	<field name="studentId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="studentId"/>
+		<property name="com.jaspersoft.studio.field.label" value="studentId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="attendance"/>
+	</field>
+	<field name="date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date"/>
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="attendance"/>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="attendance"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="courseName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="courseName"/>
+		<property name="com.jaspersoft.studio.field.label" value="courseName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="course"/>
+	</field>
+	<field name="batchName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="batchName"/>
+		<property name="com.jaspersoft.studio.field.label" value="batchName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="batch"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="94f91d47-ddb2-46c8-9b12-bcb8f00a50dd" x="120" y="13" width="330" height="40" fontSize="25.0">
+			<text><![CDATA[Student Attendance Records]]></text>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="61" splitType="Stretch">
+		<element kind="staticText" uuid="844a7f6f-5ac2-4c6c-a353-ca84dc9932e5" x="0" y="31" width="80" height="20" fontSize="12.0">
+			<text><![CDATA[Student Index]]></text>
+		</element>
+		<element kind="staticText" uuid="d030c32b-03e2-4551-9ce8-d5268d6c4fe3" x="90" y="31" width="80" height="20" fontSize="12.0">
+			<text><![CDATA[Student Name]]></text>
+		</element>
+		<element kind="staticText" uuid="1805a952-2958-4eb0-9408-7691a4b450a2" x="190" y="31" width="80" height="20" fontSize="12.0">
+			<text><![CDATA[Date]]></text>
+		</element>
+		<element kind="staticText" uuid="1f7539cb-080e-4a31-8c9c-4b293cf1c3e6" x="290" y="31" width="80" height="20" fontSize="12.0">
+			<text><![CDATA[Status]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<element kind="line" uuid="f388c9c4-599a-4c0b-a8eb-3d453ba18b60" x="0" y="0" width="520" height="1"/>
+			<element kind="textField" uuid="63f55429-5eca-4b31-b54f-d0800f8043c9" x="180" y="15" width="64" height="18">
+				<expression><![CDATA[$F{date}]]></expression>
+			</element>
+			<element kind="textField" uuid="4444349d-534b-41aa-bcb0-6efecac15a23" x="-2" y="15" width="64" height="18">
+				<expression><![CDATA[$F{studentId}]]></expression>
+			</element>
+			<element kind="textField" uuid="f94f1bd6-8aa5-471f-b395-a89fede1ac28" x="88" y="15" width="64" height="18">
+				<expression><![CDATA[$F{name}]]></expression>
+			</element>
+			<element kind="textField" uuid="e2ab6fc4-621d-4fc0-8e25-d4a0f8f6f591" x="280" y="15" width="64" height="18">
+				<expression><![CDATA[$F{status}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

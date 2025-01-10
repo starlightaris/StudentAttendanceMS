@@ -9,8 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-//import net.proteanit.sql.DbUtils;
-
+import util.ReportGenerator;
 /**
  *
  * @author pavani
@@ -411,7 +410,9 @@ public class Attendance extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
-        // TODO add your handling code here:
+        ReportGenerator reportGenerator = new ReportGenerator();
+        reportGenerator.generateReport();
+        
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
