@@ -410,8 +410,12 @@ public class Attendance extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
-        ReportGenerator reportGenerator = new ReportGenerator();
-        reportGenerator.generateReport();
+//        ReportGenerator reportGenerator = new ReportGenerator();
+//        reportGenerator.generateReport();
+        String selectedCourse = cmbCourse.getSelectedItem().toString();
+        String selectedBatch = cmbBatch.getSelectedItem().toString();
+        new ReportGenerator().generateReport(selectedCourse, selectedBatch);
+
         
     }//GEN-LAST:event_btnReportActionPerformed
 

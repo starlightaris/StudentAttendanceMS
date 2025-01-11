@@ -1,25 +1,16 @@
 <!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
-<jasperReport name="AMS" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db6d6af0-03c3-4cf1-ae63-f49fb95b9d9e">
+<jasperReport name="AMS4" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e4f023c8-97a2-4cfb-9e96-8c4c1b0fc9b7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MYSQL"/>
-	<query language="SQL"><![CDATA[SELECT 
-    attendance.*, 
-    student.name,
-    course.courseName, 
-    batch.batchName
-FROM 
-    attendance
-JOIN 
-    student ON attendance.studentId = student.studentId
-JOIN 
-    course ON student.courseId = course.courseId
-JOIN 
-    batch ON student.batchId = batch.batchId;]]></query>
-	<field name="attendanceId" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="attendanceId"/>
-		<property name="com.jaspersoft.studio.field.label" value="attendanceId"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="attendance"/>
-	</field>
+	<query language="SQL"><![CDATA[select attendance.studentId, attendance.date,
+ attendance.status, student.name as studentName,
+ course.courseName, batch.batchName
+from attendance
+join  student on attendance.studentId = student.studentId
+join course on student.courseId = course.courseId
+join batch on student.batchId = batch.batchId
+
+]]></query>
 	<field name="studentId" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="studentId"/>
 		<property name="com.jaspersoft.studio.field.label" value="studentId"/>
@@ -30,14 +21,14 @@ JOIN
 		<property name="com.jaspersoft.studio.field.label" value="date"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="attendance"/>
 	</field>
-	<field name="status" class="java.lang.Integer">
+	<field name="status" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="status"/>
 		<property name="com.jaspersoft.studio.field.label" value="status"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="attendance"/>
 	</field>
-	<field name="name" class="java.lang.String">
+	<field name="studentName" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="name"/>
-		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="studentName"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
 	</field>
 	<field name="courseName" class="java.lang.String">
@@ -51,40 +42,47 @@ JOIN
 		<property name="com.jaspersoft.studio.field.tree.path" value="batch"/>
 	</field>
 	<background splitType="Stretch"/>
-	<title height="79" splitType="Stretch">
-		<element kind="staticText" uuid="94f91d47-ddb2-46c8-9b12-bcb8f00a50dd" x="120" y="13" width="330" height="40" fontSize="25.0">
+	<title height="96" splitType="Stretch">
+		<element kind="staticText" uuid="b4c17412-d82b-46b7-b841-849fdcc1fd09" x="125" y="24" width="330" height="40" fontSize="25.0">
 			<text><![CDATA[Student Attendance Records]]></text>
 		</element>
 	</title>
-	<pageHeader height="35" splitType="Stretch"/>
+	<pageHeader height="39" splitType="Stretch">
+		<element kind="textField" uuid="b0a5bbc5-bf09-4f4c-906f-8e3522f8650c" x="20" y="4" width="100" height="30">
+			<expression><![CDATA[$F{courseName}]]></expression>
+		</element>
+		<element kind="textField" uuid="d5a9a23f-599e-435b-86cb-279792f9ad44" x="140" y="0" width="100" height="30">
+			<expression><![CDATA[$F{batchName}]]></expression>
+		</element>
+	</pageHeader>
 	<columnHeader height="61" splitType="Stretch">
-		<element kind="staticText" uuid="844a7f6f-5ac2-4c6c-a353-ca84dc9932e5" x="0" y="31" width="80" height="20" fontSize="12.0">
-			<text><![CDATA[Student Index]]></text>
-		</element>
-		<element kind="staticText" uuid="d030c32b-03e2-4551-9ce8-d5268d6c4fe3" x="90" y="31" width="80" height="20" fontSize="12.0">
-			<text><![CDATA[Student Name]]></text>
-		</element>
-		<element kind="staticText" uuid="1805a952-2958-4eb0-9408-7691a4b450a2" x="190" y="31" width="80" height="20" fontSize="12.0">
-			<text><![CDATA[Date]]></text>
-		</element>
-		<element kind="staticText" uuid="1f7539cb-080e-4a31-8c9c-4b293cf1c3e6" x="290" y="31" width="80" height="20" fontSize="12.0">
+		<element kind="staticText" uuid="08ac8b47-ef17-4b4d-873b-150d2568795d" x="290" y="29" width="80" height="20" fontSize="12.0">
 			<text><![CDATA[Status]]></text>
 		</element>
+		<element kind="staticText" uuid="edbe24b8-d0bf-473f-93d3-ebc4293c03e0" x="90" y="29" width="80" height="20" fontSize="12.0">
+			<text><![CDATA[Student Name]]></text>
+		</element>
+		<element kind="staticText" uuid="fb442dd2-a78a-480b-b55b-58fd16138334" x="190" y="29" width="80" height="20" fontSize="12.0">
+			<text><![CDATA[Date]]></text>
+		</element>
+		<element kind="staticText" uuid="d0a16243-eeaa-4b50-8af5-a007979091d7" x="0" y="29" width="80" height="20" fontSize="12.0">
+			<text><![CDATA[Student Index]]></text>
+		</element>
+		<element kind="line" uuid="3b3a43c3-2eea-41c6-aa16-936fdb42172a" x="0" y="59" width="520" height="1"/>
 	</columnHeader>
 	<detail>
-		<band height="42" splitType="Stretch">
-			<element kind="line" uuid="f388c9c4-599a-4c0b-a8eb-3d453ba18b60" x="0" y="0" width="520" height="1"/>
-			<element kind="textField" uuid="63f55429-5eca-4b31-b54f-d0800f8043c9" x="180" y="15" width="64" height="18">
-				<expression><![CDATA[$F{date}]]></expression>
+		<band height="26" splitType="Stretch">
+			<element kind="textField" uuid="6b4a0d09-247f-41e6-8426-ed4a3443df8f" x="190" y="8" width="64" height="18">
+				<expression><![CDATA[$F{date}.toString()]]></expression>
 			</element>
-			<element kind="textField" uuid="4444349d-534b-41aa-bcb0-6efecac15a23" x="-2" y="15" width="64" height="18">
+			<element kind="textField" uuid="39cc4f3e-cb69-489d-830c-c2a54cb92c3a" x="290" y="8" width="64" height="18">
+				<expression><![CDATA[$F{status}]]></expression>
+			</element>
+			<element kind="textField" uuid="6c10a423-c2f9-406b-a9d7-84e1545231dd" x="8" y="8" width="64" height="18">
 				<expression><![CDATA[$F{studentId}]]></expression>
 			</element>
-			<element kind="textField" uuid="f94f1bd6-8aa5-471f-b395-a89fede1ac28" x="88" y="15" width="64" height="18">
-				<expression><![CDATA[$F{name}]]></expression>
-			</element>
-			<element kind="textField" uuid="e2ab6fc4-621d-4fc0-8e25-d4a0f8f6f591" x="280" y="15" width="64" height="18">
-				<expression><![CDATA[$F{status}]]></expression>
+			<element kind="textField" uuid="7df54220-5efc-4bd7-90e8-b4b6357a1b93" x="90" y="8" width="82" height="18">
+				<expression><![CDATA[$F{studentName}]]></expression>
 			</element>
 		</band>
 	</detail>

@@ -111,6 +111,19 @@ public class Student extends javax.swing.JFrame {
         }
     }
     
+    //Validation methods for email, password, phone number
+    private boolean isValidEmail(String email) {
+        // Regex for a valid email address
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+        return email.matches(emailRegex);
+    }    
+    
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        // Regex for a 10-digit phone number
+        String phoneRegex = "^[0-9]{10}$";
+        return phoneNumber.matches(phoneRegex);
+    }
+    
     //Clear textboxes Method  
     public void Clear() {  
         txtName.setText("");  
@@ -345,6 +358,11 @@ public class Student extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         
+        // Get form inputs
+        String name = txtName.getText().trim();
+        String email = txtEmail.getText().trim().toLowerCase(); 
+        String phoneNo = txtPhone.getText().trim();
+
         //Using the ternary conditional operator to determind the gender type
         String selectedGenderString = (String) cmbGender.getSelectedItem();
         GenderType genderType = getGenderTypeFromString(selectedGenderString);
@@ -363,6 +381,19 @@ public class Student extends javax.swing.JFrame {
                 return;
             }
             
+            if (!isValidEmail(email)) {
+                JOptionPane.showMessageDialog(this, "Invalid email address. Please enter a valid email.",
+                        "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!isValidPhoneNumber(phoneNo)) {
+                JOptionPane.showMessageDialog(this, "Invalid phone number. Please enter a 10-digit phone number.",
+                        "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            //Connection
             Connection connection = DBConnection.getInstance().getConnection();
             
             //Get courseId
@@ -388,16 +419,15 @@ public class Student extends javax.swing.JFrame {
             int batchId = rsBatch.getInt("batchId");
             
             Studentdto student = new Studentdto(
-                txtName.getText(),
-                txtEmail.getText().trim().toLowerCase(),
-                txtPhone.getText(),
+                name,
+                email,
+                phoneNo,
                 genderType,
                 courseId,
                 batchId
             );
                    
-            
-            // Insert the student into the database
+            //Insert the student into the database
             PreparedStatement pst = connection.prepareStatement("INSERT INTO student"
                     + "(name, email, phoneNo, gender, courseId, batchId) VALUES (?,?,?,?,?,?)");
             pst.setString(1,student.getName());
@@ -452,7 +482,9 @@ public class Student extends javax.swing.JFrame {
                 if (deleted > 0) {
                     JOptionPane.showMessageDialog(this, "Student deleted successfully.");
                     //Refresh the table after deletion
-                    loadStudentTableData(); 
+                    loadStudentTableData();
+                    //Clears all fields
+                    Clear(); 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed to delete the student.", "Error", JOptionPane.ERROR_MESSAGE);
                 }

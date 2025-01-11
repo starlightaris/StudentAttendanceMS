@@ -21,7 +21,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author pavani
  */
 public class ReportGenerator {
-    public void generateReport() {
+    public void generateReport(String courseName, String batchName) {
         try {
             // Step 1: Load and compile the JRXML file
             String reportPath = "D:\\Users\\PAVANI\\Documents\\NetBeansProjects\\StudentAttendanceMS\\reports\\AMS.jrxml"; // Path to your JRXML file
@@ -34,9 +34,12 @@ public class ReportGenerator {
             HashMap<String, Object> parameters = new HashMap<>();
             // Add parameters to the HashMap if your report requires them, e.g., 
             // parameters.put("PARAMETER_NAME", value);
+ 
+            parameters.put("courseName", courseName);
+            parameters.put("batchName", batchName);
 
             // Step 4: Fill the report with data
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, DBConnection.getInstance().getConnection());
 
             // Step 5: Display the report using JasperViewer
             JasperViewer.viewReport(jasperPrint, false);
