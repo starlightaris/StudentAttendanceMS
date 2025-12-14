@@ -133,8 +133,3 @@ This project is an **Attendance Management System (AMS)** designed to help manag
 ## Contributors
 - [Senulya P H P](https://github.com/starlightaris)
 
----
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
